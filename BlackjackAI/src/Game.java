@@ -6,6 +6,7 @@ public class Game {
     ArrayList<CardDT> dealerCards = new ArrayList<>();
     ArrayList<CardDT> playerCards = new ArrayList<>();
     Deck deck = new Deck();
+    Scanner scanner = new Scanner(System.in);
     double playerMoney = 100;
 
     public Game() {
@@ -28,6 +29,51 @@ public class Game {
 
         if (CountPoints(playerCards) == 21) {
             System.out.println("Blackjack");
+        }
+        System.out.println("________________________________________________________________");
+        System.out.println("You have: " + CountPoints(playerCards) + " points");
+        System.out.println("________________________________________________________________");
+        String input = "";
+        System.out.println("do you want to hit?[y/n]");
+        do {
+            PrintCards(playerCards, "player", true);
+            System.out.println(CountPoints(playerCards));
+            input = scanner.nextLine();
+            System.out.println("Total points are: " + CountPoints(playerCards));
+            if (input.equals("y") || input.equals("Y")) {
+                Hit("player");
+                System.out.println("do you want to hit?[y/n]");
+            } else {
+                System.out.println("ok");
+                break;
+            }
+        } while (CountPoints(playerCards) <= 21 && CountPoints(playerCards) != 0);
+        System.out.println(CountPoints(playerCards));
+        PrintCards(dealerCards, "dealer", true);
+        Dealer();
+        System.out.println("The dealers total points are " + CountPoints(dealerCards));
+    }
+
+    public void winner() {
+        if (CountPoints(playerCards) > CountPoints(dealerCards)) {
+            System.out.println("you win");
+        } else if (CountPoints(playerCards) == CountPoints(dealerCards)) {
+            System.out.println("Draw");
+        } else {
+            System.out.println("dealer wins");
+        }
+    }
+
+    public void Dealer() {
+        while (1 == 1) {
+            if (CountPoints(dealerCards) < 17) {
+                Hit("dealer");
+            } else {
+                break;
+            }
+        }
+        if (CountPoints(dealerCards) > 21){
+            //todo kill dealer deck
         }
     }
 
@@ -83,24 +129,12 @@ public class Game {
         return total;
     }
 
-    public void Hit() {
-        System.out.println("Do you want to hit or stay? [h/s]");
-        Scanner scanner = new Scanner(System.in);
-        while (1 == 1) {
-            String input = scanner.nextLine();
-            if (input.equals("h")) {
-                playerCards.add(deck.GetCard());
-                break;
-                //todo add cards to the deck of the player and check if he is bust or not
-            } else if (input.equals("s")) {
-                break;
-            }
+    public void Hit(String entity) {
+        if (entity.equals("player")) {
+            playerCards.add(deck.GetCard());
+        } else {
+            dealerCards.add(deck.GetCard());
         }
-
-    }
-
-    public void finish() {
-        //todo: make a method that ends the game and appoints a winner or a draw
     }
 
     public void Payout() {
