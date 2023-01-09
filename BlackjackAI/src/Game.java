@@ -52,12 +52,23 @@ public class Game {
         PrintCards(dealerCards, "dealer", true);
         Dealer();
         System.out.println("The dealers total points are " + CountPoints(dealerCards));
+        winner();
     }
 
     public void winner() {
-        if (CountPoints(playerCards) > CountPoints(dealerCards)) {
+        int dealerPoints = CountPoints(dealerCards);
+        int playerPoints = CountPoints(playerCards);
+
+        if (dealerPoints > 21){
+            dealerPoints = 0;
+        }
+        if (playerPoints > 21){
+            playerPoints = 0;
+        }
+
+        if (playerPoints > dealerPoints) {
             System.out.println("you win");
-        } else if (CountPoints(playerCards) == CountPoints(dealerCards)) {
+        } else if (playerPoints == dealerPoints) {
             System.out.println("Draw");
         } else {
             System.out.println("dealer wins");
@@ -66,13 +77,18 @@ public class Game {
 
     public void Dealer() {
         while (1 == 1) {
-            if (CountPoints(dealerCards) < 17) {
+            int dealerTotal = CountPoints(dealerCards);
+            if (dealerTotal < 17) {
                 Hit("dealer");
+                System.out.println("________________________________________________________________");
+                System.out.println("The dealer has a new card");
+                PrintCards(dealerCards, "dealer", true);
             } else {
                 break;
             }
         }
-        if (CountPoints(dealerCards) > 21){
+
+        if (0 < 21){
             //todo kill dealer deck
         }
     }
@@ -108,22 +124,6 @@ public class Game {
                 total = total + number;
             } else {
                 total = total + number;
-            }
-        }
-
-        if (total > 21) {
-            return 0;
-        } else {
-            if (total == 21) {
-                return total;
-            } else if (amoundOfAces != 0) {
-                for (int i = 0; i < amoundOfAces; i++) {
-                    if (total + 10 > 21) {
-                        total = total + 1;
-                    } else {
-                        total = total + 11;
-                    }
-                }
             }
         }
         return total;
