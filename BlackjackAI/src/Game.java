@@ -7,7 +7,6 @@ public class Game {
     ArrayList<CardDT> playerCards = new ArrayList<>();
     Deck deck = new Deck();
     Scanner scanner = new Scanner(System.in);
-    double playerMoney = 100;
 
     public Game() {
         //Starts the game and deals the cards
@@ -59,6 +58,7 @@ public class Game {
         int dealerPoints = CountPoints(dealerCards);
         int playerPoints = CountPoints(playerCards);
 
+
         if (dealerPoints > 21){
             dealerPoints = 0;
         }
@@ -68,6 +68,7 @@ public class Game {
 
         if (playerPoints > dealerPoints) {
             System.out.println("you win");
+
         } else if (playerPoints == dealerPoints) {
             System.out.println("Draw");
         } else {
@@ -86,10 +87,6 @@ public class Game {
             } else {
                 break;
             }
-        }
-
-        if (0 < 21){
-            //todo kill dealer deck
         }
     }
 
