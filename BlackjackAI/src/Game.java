@@ -58,11 +58,10 @@ public class Game {
         int dealerPoints = CountPoints(dealerCards);
         int playerPoints = CountPoints(playerCards);
 
-
-        if (dealerPoints > 21){
+        if (dealerPoints > 21) {
             dealerPoints = 0;
         }
-        if (playerPoints > 21){
+        if (playerPoints > 21) {
             playerPoints = 0;
         }
 

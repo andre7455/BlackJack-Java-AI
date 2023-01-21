@@ -4,7 +4,6 @@ public class Deck {
     ArrayList<CardDT> cards = new ArrayList<>();
 
     public CardDT GetCard() {
-        //todo maybe make the random card index generator a method in and of itself
         int min = 1;
         int max = cards.size();
         double randomNumber = min + (Math.random() * (max - min + 1));
