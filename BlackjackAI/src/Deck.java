@@ -14,18 +14,6 @@ public class Deck {
         return drawnCard;
     }
 
-    public void ShuffleDeck() {
-        for (int i = 0; i < 1; i++) {
-            int min = 1;
-            int max = cards.size();
-            double randomNumber = min + (Math.random() * (max - min + 1));
-            int random = (int) randomNumber - 1;
-            CardDT tempcard = cards.get(random);
-            cards.remove(random);
-            cards.add(tempcard);
-        }
-    }
-
     public int CountPoints(ArrayList<CardDT> cards) {
         int total = 0;
         int amoundOfAces = 0;

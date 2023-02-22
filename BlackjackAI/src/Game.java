@@ -9,11 +9,8 @@ public class Game {
     Scanner scanner = new Scanner(System.in);
 
     public Game() {
-        //Starts the game and deals the cards
-        CardDT cards = new CardDT();
         //getting the Deck
         deck.InitualizeNewDeck();
-        deck.ShuffleDeck();
 
         //dealing the cards
         dealerCards.add(deck.GetCard());
@@ -76,16 +73,13 @@ public class Game {
     }
 
     public void Dealer() {
-        while (1 == 1) {
-            int dealerTotal = CountPoints(dealerCards);
-            if (dealerTotal < 17) {
-                Hit("dealer");
-                System.out.println("________________________________________________________________");
-                System.out.println("The dealer has a new card");
-                PrintCards(dealerCards, "dealer", true);
-            } else {
-                break;
-            }
+        int dealerTotal = CountPoints(dealerCards);
+        while (dealerTotal < 17) {
+            Hit("dealer");
+            System.out.println("________________________________________________________________");
+            System.out.println("The dealer has a new card");
+            PrintCards(dealerCards, "dealer", true);
+            dealerTotal = CountPoints(dealerCards);
         }
     }
 
